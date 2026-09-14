@@ -35,6 +35,8 @@ remotes::install_github("ang-yu/ria.test")
 
 ### Usage
 
+Notation: `D` denotes treatment (`trt`), `W` baseline covariates (`pre`), and `L` post-treatment confounders (`post`). `L′` is the matched donor copy of `L` used for the randomized interventional analogues. Set `lprime_folds` in `ria.test.control()` to control the matching batches.
+
 ```{r eval=FALSE}
 library(ria.test)
 
@@ -42,15 +44,15 @@ library(ria.test)
 set.seed(123)
 n <- 500
 w <- rnorm(n)
-a <- rbinom(n, 1, plogis(w))
-l <- rnorm(n, a + w)
-m <- rnorm(n, a + l + w)
-y <- rnorm(n, a + l + m + w)
-dat <- data.frame(w, a, l, m, y)
+d <- rbinom(n, 1, plogis(w))
+l <- rnorm(n, d + w)
+m <- rnorm(n, d + l + w)
+y <- rnorm(n, d + l + m + w)
+dat <- data.frame(w, d, l, m, y)
 
 test_fit <- ria.test(
   data = dat,
-  trt = "a",
+  trt = "d",
   outcome = "y",
   mediators = "m",
   pre = "w",
