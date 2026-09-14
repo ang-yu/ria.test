@@ -30,20 +30,20 @@ library(ria.test)
 # `set.seed()` controls R-level randomness; `torch_seed` controls Torch.
 set.seed(123)
 n <- 500
-w <- rnorm(n)
-d <- rbinom(n, 1, plogis(w))
-l <- rnorm(n, d + w)
-m <- rnorm(n, d + l + w)
-y <- rnorm(n, d + l + m + w)
-dat <- data.frame(w, d, l, m, y)
+W <- rnorm(n)
+D <- rbinom(n, 1, plogis(W))
+L <- rnorm(n, D + W)
+M <- rnorm(n, D + L + W)
+Y <- rnorm(n, D + L + M + W)
+dat <- data.frame(W, D, L, M, Y)
 
 test_fit <- ria.test(
   data = dat,
-  trt = "d",
-  outcome = "y",
-  mediators = "m",
-  pre = "w",
-  post = "l",
+  trt = "D",
+  outcome = "Y",
+  mediators = "M",
+  pre = "W",
+  post = "L",
   d0 = \(data, trt) rep(0, nrow(data)),
   d1 = \(data, trt) rep(1, nrow(data)),
   control = ria.test.control(torch_seed = 123L)
