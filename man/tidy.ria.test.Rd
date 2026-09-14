@@ -22,20 +22,20 @@ Tidy a ria.test object
 if (torch::torch_is_installed()) {
 	set.seed(123)
 	n <- 200
-	w <- rnorm(n)
-	d <- rbinom(n, 1, plogis(w))
-	l <- rnorm(n, d + w)
-	m <- rnorm(n, d + l + w)
-	y <- rnorm(n, d + l + m + w)
-	dat <- data.frame(w, d, l, m, y)
+	C <- rnorm(n)
+	D <- rbinom(n, 1, plogis(C))
+	L <- rnorm(n, D + C)
+	M <- rnorm(n, D + L + C)
+	Y <- rnorm(n, D + L + M + C)
+	dat <- data.frame(C, D, L, M, Y)
 
 	res <- ria.test(
 		data = dat,
-		trt = "d",
-		outcome = "y",
-		mediators = "m",
-		pre = "w",
-		post = "l",
+		trt = "D",
+		outcome = "Y",
+		mediators = "M",
+		pre = "C",
+		post = "L",
 		d0 = \(data, trt) rep(0, nrow(data)),
 		d1 = \(data, trt) rep(1, nrow(data)),
 		control = ria.test.control(

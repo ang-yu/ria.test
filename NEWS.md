@@ -1,7 +1,8 @@
 # ria.test (development version)
 
-* Use D for treatment, W for baseline covariates, and L for post-treatment
+* Use D for treatment, C for baseline covariates, and L for post-treatment
   confounders throughout the implementation, examples, and documentation.
+  The outcome-observation indicator is named `observed` internally.
   Rename the matched copy to L-prime and its control to `lprime_folds`.
   This is a breaking rename: use `lprime_folds` in place of `zprime_folds`.
   The public arguments `trt`, `pre`, and `post` are unchanged.

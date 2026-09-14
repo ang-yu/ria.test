@@ -80,13 +80,13 @@ linear_permutation_lp <- function(data) {
 set_lp <- function(cd, folds) {
 	folds <- make_folds(cd@data, folds, cd@vars@id)
 
-	DW <- one_hot_encode(cd@data, c(cd@vars@D, cd@vars@W))
+	DC <- one_hot_encode(cd@data, c(cd@vars@D, cd@vars@C))
 	L <- cd@data[, cd@vars@L, drop = FALSE]
 
 	permute <- function(i) {
-		lp <- data.frame(matrix(NA, nrow = nrow(DW), ncol = ncol(L)))
+		lp <- data.frame(matrix(NA, nrow = nrow(DC), ncol = ncol(L)))
 		names(lp) <- names(L)
-		index <- linear_permutation(DW[i, , drop = FALSE])
+		index <- linear_permutation(DC[i, , drop = FALSE])
 		lp[i, ] <- L[i[index], , drop = FALSE]
 		lp
 	}

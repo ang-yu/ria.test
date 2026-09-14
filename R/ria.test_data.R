@@ -24,14 +24,14 @@ ria.test_data <- S7::new_class("ria.test_data",
 			weights = normalize(weights),
 			d0 = d0,
 			d1 = d1,
-			data_0 = shift_data(data, vars@D, vars@C, d0),
-			data_1 = shift_data(data, vars@D, vars@C, d1),
+			data_0 = shift_data(data, vars@D, vars@observed, d0),
+			data_1 = shift_data(data, vars@D, vars@observed, d1),
 			data_0lp = data.frame(),
 			data_1lp = data.frame()
 		)
 	},
 	validator = function(self) {
-		all_vars <- c(self@vars@D, self@vars@W, self@vars@L, self@vars@M, self@vars@C, self@vars@Y)
+		all_vars <- c(self@vars@D, self@vars@C, self@vars@L, self@vars@M, self@vars@observed, self@vars@Y)
 		all_vars <- as.vector(na.omit(all_vars))
 
 		if (!all(all_vars %in% names(self@data))) {

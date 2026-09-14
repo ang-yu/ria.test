@@ -15,7 +15,7 @@
 #' @param mediators [\code{character}]\cr
 #'	A vector containing the column names of the mediator variables.
 #' @param pre [\code{character}]\cr
-#'  A vector containing the column names of baseline covariates (W) to be
+#'  A vector containing the column names of baseline covariates (C) to be
 #'  controlled for.
 #' @param post [\code{character}]\cr
 #'  A vector containing the column names of post-treatment confounders (L).
@@ -85,8 +85,8 @@ ria.test <- function(data,
 			Y = outcome,
 			M = mediators,
 			L = post,
-			W = pre,
-			C = obs %??% NA_character_,
+			C = pre,
+			observed = obs %??% NA_character_,
 			id = id %??% NA_character_
 		),
 		weights = weights,

@@ -107,7 +107,7 @@ test_that("invalid solver results are rejected", {
 
 test_that("set_lp indexes multiple L columns in fold order with one profile column", {
 	x <- data.frame(d = rep(0, 8), l = 1:8, l2 = (1:8)^2, m = 0, y = 0)
-	vars <- ria.test_vars(D = "d", W = character(), L = c("l", "l2"), M = "m", Y = "y")
+	vars <- ria.test_vars(D = "d", C = character(), L = c("l", "l2"), M = "m", Y = "y")
 	identity_shift <- function(data, trt) data[[trt]]
 	cd <- ria.test_data(x, vars, rep(1, 8), identity_shift, identity_shift)
 	sets <- list(c(7L, 1L, 5L, 3L), c(8L, 6L, 2L, 4L))
