@@ -1,7 +1,7 @@
 Package: ria.test
 Type: Package
 Title: Testing Equality of Natural Mediation Effects and Their Randomized Interventional Analogues
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: 
     c(person(given = "Ang",
              family = "Yu",

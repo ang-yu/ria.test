@@ -1,4 +1,4 @@
-# ria.test (development version)
+# ria.test 0.3.0
 
 * Use D for treatment, C for baseline covariates, and L for post-treatment
   confounders throughout the implementation, examples, and documentation.
