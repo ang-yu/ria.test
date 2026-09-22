@@ -40,9 +40,6 @@ remotes::install_github("ang-yu/ria.test")
 
 ### Usage
 
-Notation: `D` denotes treatment (`trt`), `C` baseline covariates
-(`pre`), and `L` post-treatment confounders (`post`).
-
 ``` r
 library(ria.test)
 
