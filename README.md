@@ -28,7 +28,6 @@ Notation: `D` denotes treatment (`trt`), `C` baseline covariates (`pre`), and `L
 ``` r
 library(ria.test)
 
-# `set.seed()` controls R-level randomness; `torch_seed` controls Torch.
 set.seed(123)
 n <- 500
 C <- rnorm(n)
@@ -41,8 +40,8 @@ dat <- data.frame(C, D, L, M, Y)
 test_fit <- ria.test(
   data = dat,
   trt = "D",
-  outcome = "Y",
-  mediators = "M",
+  out = "Y",
+  med = "M",
   pre = "C",
   post = "L",
   d0 = \(data, trt) rep(0, nrow(data)),
