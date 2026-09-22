@@ -1,3 +1,7 @@
+# ria.test 0.3.0.9000
+
+* Change the default learners to `c("mean", "glm", "ranger")`.
+
 # ria.test 0.3.0
 
 * Rename the public arguments `outcome` and `mediators` to `out` and `med`.

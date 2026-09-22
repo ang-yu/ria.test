@@ -34,7 +34,7 @@
 #'  A optional vector of survey weights.
 #' @param learners [\code{character}]\cr
 #'  A vector of \code{mlr3superlearner} algorithms
-#'  for estimation of the outcome regressions. Default is \code{"glm"}, a main effects GLM.
+#'  for estimation of the outcome regressions. Defaults to \code{c("mean", "glm", "ranger")}.
 #' @param nn_module [\code{function}]\cr A function that returns a neural network module.
 #' @param control [\code{ria.test.control}]\cr
 #'  Control parameters for the estimation procedure. Use \code{ria.test.control()} to set these values.
@@ -58,7 +58,7 @@ ria.test <- function(data,
 										d0 = NULL,
 										d1 = NULL,
 										weights = rep(1, nrow(data)),
-										learners = "glm",
+										learners = c("mean", "glm", "ranger"),
 										nn_module = sequential_module(),
 										control = ria.test.control()) {
 
