@@ -2,7 +2,7 @@
 % Please edit documentation in R/ria.test.R
 \name{ria.test}
 \alias{ria.test}
-\title{Estimate randomized interventional analogues and their falsification test}
+\title{Falsification test for the equivalence between natural mediation effects and their randomized interventional analogues}
 \usage{
 ria.test(
   data,
