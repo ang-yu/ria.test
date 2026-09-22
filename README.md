@@ -13,7 +13,7 @@
 
 The implementation uses Riesz-regression machinery adapted from the upstream mediation-estimation codebase for the total-effect contrast and associated uncertainty estimates.
 
-*ria.test* is derived from the *crumble* package. Attribution identifies authorship of incorporated code and does not imply endorsement of this package or its modifications.
+*ria.test* is derived from the [*crumble*](https://CRAN.R-project.org/package=crumble) package with various adaptations. {ria.test} uniquely enables statistical inference for the estimated TE − TE<sup>R</sup>. Separately, {ria.test} also makes improvements in terms of reproducibility, efficiency, and handling of edge cases.
 
 ### Installation
 
