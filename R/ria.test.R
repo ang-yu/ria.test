@@ -1,4 +1,4 @@
-#' Falsification test for the equivalence between natural mediation effects and their randomized interventional analogues
+#' Estimate randomized interventional analogues and their falsification test statistic
 #'
 #' Estimate the total effect, its randomized interventional analogue (RIA),
 #' their difference, and the randomized interventional indirect and direct effects.
