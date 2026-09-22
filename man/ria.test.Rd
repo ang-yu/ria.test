@@ -109,7 +109,6 @@ if (torch::torch_is_installed()) {
 		)
 	)
 
-	print(res)
 	tidy(res)
 }
 }
