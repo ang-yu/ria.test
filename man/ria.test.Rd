@@ -7,8 +7,8 @@
 ria.test(
   data,
   trt,
-  outcome,
-  mediators,
+  out,
+  med,
   pre,
   post,
   obs = NULL,
@@ -29,10 +29,10 @@ for the estimation problem.}
 \item{trt}{[\code{character}]\cr
 A vector containing the column names of treatment variables (D).}
 
-\item{outcome}{[\code{character(1)}]\cr
+\item{out}{[\code{character(1)}]\cr
 The column name of the outcome variable.}
 
-\item{mediators}{[\code{character}]\cr
+\item{med}{[\code{character}]\cr
 A vector containing the column names of the mediator variables.}
 
 \item{pre}{[\code{character}]\cr
@@ -43,7 +43,7 @@ controlled for.}
 A vector containing the column names of post-treatment confounders (L).}
 
 \item{obs}{[\code{character(1)}]\cr
-An optional column name (with values coded as 0 or 1) for whether or not the \code{outcome} is observed.
+An optional column name (with values coded as 0 or 1) for whether or not the \code{out} is observed.
 Must be provided if there is missingness in the outcome! Default is \code{NULL}.}
 
 \item{id}{[\code{character(1)}]\cr
@@ -94,8 +94,8 @@ if (torch::torch_is_installed()) {
 	res <- ria.test(
 		data = dat,
 		trt = "D",
-		outcome = "Y",
-		mediators = "M",
+		out = "Y",
+		med = "M",
 		pre = "C",
 		post = "L",
 		d0 = \(data, trt) rep(0, nrow(data)),

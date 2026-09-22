@@ -1,5 +1,8 @@
 # ria.test 0.3.0
 
+* Rename the public arguments `outcome` and `mediators` to `out` and `med`.
+  Calls using the old argument names must be updated.
+
 * Use D for treatment, C for baseline covariates, and L for post-treatment
   confounders throughout the implementation, examples, and documentation.
   The outcome-observation indicator is named `observed` internally.

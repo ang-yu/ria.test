@@ -10,9 +10,9 @@
 #'  for the estimation problem.
 #' @param trt [\code{character}]\cr
 #'  A vector containing the column names of treatment variables (D).
-#' @param outcome [\code{character(1)}]\cr
+#' @param out [\code{character(1)}]\cr
 #'  The column name of the outcome variable.
-#' @param mediators [\code{character}]\cr
+#' @param med [\code{character}]\cr
 #'	A vector containing the column names of the mediator variables.
 #' @param pre [\code{character}]\cr
 #'  A vector containing the column names of baseline covariates (C) to be
@@ -20,7 +20,7 @@
 #' @param post [\code{character}]\cr
 #'  A vector containing the column names of post-treatment confounders (L).
 #' @param obs [\code{character(1)}]\cr
-#'  An optional column name (with values coded as 0 or 1) for whether or not the \code{outcome} is observed.
+#'  An optional column name (with values coded as 0 or 1) for whether or not the \code{out} is observed.
 #'  Must be provided if there is missingness in the outcome! Default is \code{NULL}.
 #' @param id [\code{character(1)}]\cr
 #'  An optional column name containing cluster level identifiers.
@@ -49,8 +49,8 @@
 #' @example inst/examples/examples.R
 ria.test <- function(data,
 										trt,
-										outcome,
-										mediators,
+										out,
+										med,
 										pre,
 										post,
 										obs = NULL,
@@ -63,12 +63,12 @@ ria.test <- function(data,
 										control = ria.test.control()) {
 
 	# Perform initial checks
-	assert_data_frame(data[, c(trt, outcome, mediators, pre, post, obs, id)])
-	assert_not_missing(data, trt, pre, mediators, post, obs)
+	assert_data_frame(data[, c(trt, out, med, pre, post, obs, id)])
+	assert_not_missing(data, trt, pre, med, post, obs)
 	assert_function(d0, nargs = 2, null.ok = TRUE)
 	assert_function(d1, nargs = 2, null.ok = TRUE)
 	assert_function(nn_module)
-	assert_binary_0_1(data, outcome)
+	assert_binary_0_1(data, out)
 	assert_binary_0_1(data, obs)
 	checkmate::assert_character(post, min.len = 1L, any.missing = FALSE)
 	assert_numeric(weights, len = nrow(data), finite = TRUE, any.missing = FALSE)
@@ -82,8 +82,8 @@ ria.test <- function(data,
 		data = data,
 		vars = ria.test_vars(
 			D = trt,
-			Y = outcome,
-			M = mediators,
+			Y = out,
+			M = med,
 			L = post,
 			C = pre,
 			observed = obs %??% NA_character_,
@@ -121,11 +121,11 @@ ria.test <- function(data,
 
 	# Estimates ---------------------------------------------------------------
 
-	out <- list(
+	result <- list(
 		estimates = calculate_estimates(eif_ns, eif_rs),
 		call = match.call()
 	)
 
-	class(out) <- "ria.test"
-	out
+	class(result) <- "ria.test"
+	result
 }

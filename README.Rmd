@@ -22,11 +22,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-*ria.test* implements the empirical test introduced by Yu, Ge, and Elwert (2026) for detecting when randomized interventional analogues should not be interpreted as natural mediation effects. The test estimates `TE - TE^R`, the difference between the total effect and its randomized interventional analogue. Rejecting `TE - TE^R = 0` falsifies the composite null that the natural indirect and direct effects equal their randomized interventional analogues. The procedure remains valid in settings where the natural effects themselves are not identified, and `|TE - TE^R|` provides a lower bound on the total divergence between the natural and randomized interventional decompositions.
+*ria.test* implements the empirical test introduced by Yu, Ge, and Elwert (2026) for detecting when randomized interventional analogues should not be interpreted as natural mediation effects. The test estimates `TE - TE^R`, the difference between the total effect and its randomized interventional analogue. Rejecting `TE - TE^R = 0` falsifies the composite null that the natural indirect and direct effects equal their randomized interventional analogues. The procedure remains valid in settings where the natural effects themselves are not identified, and `|TE - TE^R|` provides a lower bound on the total divergence between the natural and randomized interventional decompositions. The estimation uses a Riesz-regression approach. 
 
-The implementation uses Riesz-regression machinery adapted from the upstream mediation-estimation codebase for the total-effect contrast and associated uncertainty estimates.
-
-*ria.test* is derived from the [*crumble*](https://CRAN.R-project.org/package=crumble) package with various adaptations. {ria.test} uniquely enables statistical inference for the estimated TE − TE<sup>R</sup>. Separately, {ria.test} also makes improvements in terms of reproducibility, efficiency, and handling of edge cases.
+*ria.test* is derived from the [*crumble*](https://CRAN.R-project.org/package=crumble) package with various adaptations. {ria.test} uniquely enables statistical inference for the estimated TE − TE<sup>R</sup>. Separately, {ria.test} also makes improvements in terms of reproducibility, efficiency, and the handling of edge cases.
 
 ### Installation
 
@@ -36,7 +34,7 @@ remotes::install_github("ang-yu/ria.test")
 
 ### Usage
 
-Notation: `D` denotes treatment (`trt`), `C` baseline covariates (`pre`), and `L` post-treatment confounders (`post`). `L′` is the matched donor copy of `L` used for the randomized interventional analogues. Set `lprime_folds` in `ria.test.control()` to control the matching batches.
+Notation: `D` denotes treatment (`trt`), `C` baseline covariates (`pre`), and `L` post-treatment confounders (`post`). 
 
 ```{r eval=FALSE}
 library(ria.test)

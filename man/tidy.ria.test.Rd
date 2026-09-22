@@ -32,8 +32,8 @@ if (torch::torch_is_installed()) {
 	res <- ria.test(
 		data = dat,
 		trt = "D",
-		outcome = "Y",
-		mediators = "M",
+		out = "Y",
+		med = "M",
 		pre = "C",
 		post = "L",
 		d0 = \(data, trt) rep(0, nrow(data)),
