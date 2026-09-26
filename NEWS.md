@@ -1,3 +1,10 @@
+# ria.test 0.3.0.9001
+
+* Correct sequential Riesz regression to pair previous-stage weights with their
+  observations in each minibatch and prevent tensor broadcasting across rows.
+  This changes the fitted representers and can change estimates, standard errors,
+  and p-values; analyses using earlier versions should be rerun.
+
 # ria.test 0.3.0.9000
 
 * Change the default learners to `c("mean", "glm", "ranger")`.
