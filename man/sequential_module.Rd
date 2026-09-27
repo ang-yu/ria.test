@@ -4,7 +4,7 @@
 \alias{sequential_module}
 \title{Sequential neural network module function factory}
 \usage{
-sequential_module(layers = 1, hidden = 20, dropout = 0.1)
+sequential_module(layers = 1, hidden = 20, dropout = 0.2)
 }
 \arguments{
 \item{layers}{[numeric(1)]\cr Number of hidden layers.}

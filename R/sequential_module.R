@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' if (torch::torch_is_installed()) sequential_module()
-sequential_module <- function(layers = 1, hidden = 20, dropout = 0.1) {
+sequential_module <- function(layers = 1, hidden = 20, dropout = 0.2) {
 	function(d_in) {
 		d_out <- 1
 

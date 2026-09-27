@@ -8,10 +8,11 @@
 #' @param learning_rate [\code{numeric(1)}]\cr The learning rate for the neural network.
 #' @param batch_size [\code{numeric(1)}]\cr The batch size for mini-batch gradient descent.
 #' @param device [\code{character(1)}]\cr Object representing the device on which a \code{torch_tensor} is or will be allocated.
-#' @param torch_seed [\code{integer(1)}]\cr Optional seed for Torch's random-number
-#'   generator. This controls neural-network initialization and dropout but does
-#'   not affect R's random-number generator. Use \code{set.seed()} separately to
-#'   control R-level randomness.
+#' @param torch_seed [\code{integer(1)}]\cr Seed for Torch's random-number
+#'   generator. Defaults to \code{1L}; use \code{NULL} to skip explicit seeding.
+#'   This controls neural-network initialization and dropout but does not affect
+#'   R's random-number generator. Use \code{set.seed()} separately to control
+#'   R-level randomness.
 #'
 #' @return A list of control parameters
 #' @export
@@ -22,11 +23,11 @@ ria.test.control <- function(
 	crossfit_folds = 10L,
 	mlr3superlearner_folds = 10L,
 	lprime_folds = 1L,
-	epochs = 100L,
-	learning_rate = 0.01,
+	epochs = 10L,
+	learning_rate = 0.001,
 	batch_size = 64,
 	device = c("cpu", "cuda", "mps"),
-	torch_seed = NULL
+	torch_seed = 1L
 ) {
 	checkmate::assert_number(crossfit_folds)
 	checkmate::assert_number(mlr3superlearner_folds)

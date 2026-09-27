@@ -8,11 +8,11 @@ ria.test.control(
   crossfit_folds = 10L,
   mlr3superlearner_folds = 10L,
   lprime_folds = 1L,
-  epochs = 100L,
-  learning_rate = 0.01,
+  epochs = 10L,
+  learning_rate = 0.001,
   batch_size = 64,
   device = c("cpu", "cuda", "mps"),
-  torch_seed = NULL
+  torch_seed = 1L
 )
 }
 \arguments{
@@ -31,11 +31,11 @@ With larger sample sizes, a larger number will increase speed.}
 
 \item{device}{[\code{character(1)}]\cr Object representing the device on which a \code{torch_tensor} is or will be allocated.}
 
-\item{torch_seed}{[\code{integer(1)}]\cr Optional seed for Torch's random-number
-generator. This controls neural-network initialization and dropout but does
-not affect R's random-number generator. Use \code{set.seed()} separately to
-control R-level randomness.}
-
+\item{torch_seed}{[\code{integer(1)}]\cr Seed for Torch's random-number
+generator. Defaults to \code{1L}; use \code{NULL} to skip explicit seeding.
+This controls neural-network initialization and dropout but does not affect
+R's random-number generator. Use \code{set.seed()} separately to control
+R-level randomness.}
 }
 \value{
 A list of control parameters

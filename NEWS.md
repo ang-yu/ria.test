@@ -1,3 +1,15 @@
+# ria.test 0.3.0.9003
+
+* Set the default `torch_seed` to `1L`. Use `torch_seed = NULL` to skip explicit
+  Torch seeding, or supply another seed to override the default. R-level
+  randomness remains controlled separately with `set.seed()`.
+
+# ria.test 0.3.0.9002
+
+* Change the default Riesz neural-network training to 10 epochs, a learning rate
+  of 0.001, and dropout of 0.2. Calls that omit these settings now use the new
+  defaults; explicit settings continue to take precedence.
+
 # ria.test 0.3.0.9001
 
 * Correct sequential Riesz regression to pair previous-stage weights with their

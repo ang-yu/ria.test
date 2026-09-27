@@ -6,8 +6,9 @@ test_that("L-prime folds use only the new name", {
 	expect_error(ria.test.control(lprime_folds = NA_real_), "lprime_folds")
 })
 
-test_that("torch_seed is optional and validated", {
-	expect_null(ria.test.control()$torch_seed)
+test_that("torch_seed defaults to one, supports opting out, and is validated", {
+	expect_identical(ria.test.control()$torch_seed, 1L)
+	expect_null(ria.test.control(torch_seed = NULL)$torch_seed)
 	expect_identical(ria.test.control(torch_seed = 1)$torch_seed, 1L)
 	expect_error(ria.test.control(torch_seed = -1), "Assertion on 'torch_seed' failed")
 	expect_error(ria.test.control(torch_seed = 1.5), "Assertion on 'torch_seed' failed")
