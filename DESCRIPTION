@@ -1,7 +1,7 @@
 Package: ria.test
 Type: Package
 Title: Testing Equality of Natural Mediation Effects and Their Randomized Interventional Analogues
-Version: 0.3.0.9003
+Version: 0.3.0.9004
 Authors@R:
     person(given = "Ang",
            family = "Yu",
@@ -41,7 +41,7 @@ Imports:
     generics,
     mlr3superlearner,
     progressr,
-    ife (>= 0.2.1)
+    ife (>= 0.2.5)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

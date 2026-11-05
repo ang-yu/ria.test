@@ -24,9 +24,10 @@ calc_eifs <- function(cd, alphas, thetas, .f) {
 	eifs <- sapply(colnames(alphas[[1]]), \(x) .f(cd, thetas, alphas, x))
 	id <- cd@data[[cd@vars@id]]
 	apply(eifs, 2, \(j) {
+		estimate <- weighted.mean(j, cd@weights)
 		ife::ife(
-			x = weighted.mean(j, cd@weights),
-			eif = j,
+			x = estimate,
+			eif = j - estimate,
 			weights = cd@weights,
 			id = as.character(cd@data[[cd@vars@id]] %??% seq_len(nrow(eifs)))
 		)

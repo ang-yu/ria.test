@@ -21,3 +21,24 @@ test_that("the test estimand set contains all Table 1 quantities", {
 		c("TE" = 7, "TE^R" = 6, "TE - TE^R" = 1, "NIE^R" = 4, "NDE^R" = 2)
 	)
 })
+
+test_that("unit scores are centered before weighted cluster sums are formed", {
+	data <- data.frame(d = 0, m = 0, y = 0, id = c(1, 2, 2, 2))
+	vars <- ria.test_vars(D = "d", M = "m", Y = "y", L = NA_character_, id = "id")
+	weights <- c(2, 1, 1, 4)
+	identity_shift <- function(data, trt) data[[trt]]
+	cd <- ria.test_data(data, vars, weights, identity_shift, identity_shift)
+
+	base <- c(4, 0, 0, 0)
+	scores <- cbind(base = base, shifted = base + 1)
+	estimates <- calc_eifs(cd, list(scores), NULL,
+		function(cd, theta, alpha, key) alpha[[1]][, key])
+
+	# The weighted mean is 1. The two centered cluster totals are 6 and -6
+	# on the original weight scale, with total weight 8.
+	expect_equal(estimates$base@x, 1)
+	expect_equal(estimates$base@std_error, 1.5)
+	contrast <- estimates$shifted - estimates$base
+	expect_equal(contrast@x, 1)
+	expect_equal(contrast@std_error, 0)
+})

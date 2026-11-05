@@ -1,3 +1,10 @@
+# ria.test 0.3.0.9004
+
+* Subtract the weighted mean score from each observation's score before
+  computing standard errors. This corrects inference when cluster sizes or
+  total weights differ. The package now requires `ife` 0.2.5 or later to
+  compute standard errors from within-cluster sums.
+
 # ria.test 0.3.0.9003
 
 * Set the default `torch_seed` to `1L`. Use `torch_seed = NULL` to skip explicit
