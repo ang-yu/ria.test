@@ -1,3 +1,7 @@
+# ria.test 0.3.0.9005
+
+* Use 5 cross-fitting folds and 2 L-prime folds by default.
+
 # ria.test 0.3.0.9004
 
 * Subtract the weighted mean score from each observation's score before

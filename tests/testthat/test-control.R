@@ -1,5 +1,10 @@
+test_that("fold controls use the expected defaults", {
+	control <- ria.test.control()
+	expect_identical(control$crossfit_folds, 5L)
+	expect_identical(control$lprime_folds, 2L)
+})
+
 test_that("L-prime folds use only the new name", {
-	expect_identical(ria.test.control()$lprime_folds, 1L)
 	expect_identical(ria.test.control(lprime_folds = 5L)$lprime_folds, 5L)
 	expect_error(ria.test.control(zprime_folds = 5L), "unused argument")
 	expect_false("zprime_folds" %in% names(ria.test.control()))

@@ -20,9 +20,9 @@
 #' @examples
 #' if (torch::torch_is_installed()) ria.test.control(crossfit_folds = 5)
 ria.test.control <- function(
-	crossfit_folds = 10L,
+	crossfit_folds = 5L,
 	mlr3superlearner_folds = 10L,
-	lprime_folds = 1L,
+	lprime_folds = 2L,
 	epochs = 10L,
 	learning_rate = 0.001,
 	batch_size = 64,
