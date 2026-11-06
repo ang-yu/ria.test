@@ -1,3 +1,22 @@
+fit_theta_regression <- function(data, target, library, outcome_type, folds, newdata, group = NULL) {
+	y <- data[[target]]
+	if (outcome_type == "continuous" && length(y) > 0L &&
+			all(is.finite(y)) && all(y == y[[1L]])) {
+		# A single mean learner avoids the combination model for constant outcomes.
+		library <- "mean"
+	}
+
+	mlr3superlearner::mlr3superlearner(
+		data = data,
+		target = target,
+		library = library,
+		outcome_type = outcome_type,
+		folds = folds,
+		newdata = newdata,
+		group = group
+	)
+}
+
 estimate_theta <- function(cd, folds, params, learners_regressions, control) {
 	thetas <- vector("list", control$crossfit_folds)
 	i <- 1
@@ -17,7 +36,7 @@ theta <- function(train, valid, vars, params, learners, control) {
 	valid <- valid[sapply(valid, \(x) ncol(x) > 0)]
 	obs <- censored(train$data, vars@observed)
 
-	theta_y <- mlr3superlearner::mlr3superlearner(
+	theta_y <- fit_theta_regression(
 		data = train$data[obs, na.omit(c(vars@D, vars@C, vars@M, vars@L, vars@Y))],
 		target = vars@Y,
 		library = learners,
@@ -41,7 +60,7 @@ theta <- function(train, valid, vars, params, learners, control) {
 			b3_train <- predict(theta_y, train[[j]])
 			b3_valid <- theta_y$preds[[j]]
 
-			theta2 <- mlr3superlearner::mlr3superlearner(
+			theta2 <- fit_theta_regression(
 				data = add_psuedo(train$data[, na.omit(c(vars@D, vars@C, vars@L))], b3_train),
 				target = "tmp_ria_test_pseudo_y",
 				library = learners,
@@ -54,7 +73,7 @@ theta <- function(train, valid, vars, params, learners, control) {
 			b2_train <- predict(theta2, train[[k]])
 			b2_valid <- theta2$preds[[k]]
 
-			theta1 <- mlr3superlearner::mlr3superlearner(
+			theta1 <- fit_theta_regression(
 				data = add_psuedo(train$data[, c(vars@D, vars@C)], b2_train),
 				target = "tmp_ria_test_pseudo_y",
 				library = learners,
@@ -94,7 +113,7 @@ theta <- function(train, valid, vars, params, learners, control) {
 		b4_train <- predict(theta_y, train[[i]])
 		b4_valid <- theta_y$preds[[i]]
 
-		theta3 <- mlr3superlearner::mlr3superlearner(
+		theta3 <- fit_theta_regression(
 			data = add_psuedo(train$data[, c(vars@D, vars@C, vars@M)], b4_train),
 			target = "tmp_ria_test_pseudo_y",
 			library = learners,
@@ -107,7 +126,7 @@ theta <- function(train, valid, vars, params, learners, control) {
 		b3_train <- predict(theta3, train[[j]])
 		b3_valid <- theta3$preds[[j]]
 
-		theta2 <- mlr3superlearner::mlr3superlearner(
+		theta2 <- fit_theta_regression(
 			data = add_psuedo(train$data[, c(vars@D, vars@C, vars@L)], b3_train),
 			target = "tmp_ria_test_pseudo_y",
 			library = learners,
@@ -120,7 +139,7 @@ theta <- function(train, valid, vars, params, learners, control) {
 		b2_train <- predict(theta2, train[[k]])
 		b2_valid <- theta2$preds[[k]]
 
-		theta1 <- mlr3superlearner::mlr3superlearner(
+		theta1 <- fit_theta_regression(
 			data = add_psuedo(train$data[, c(vars@D, vars@C)], b2_train),
 			target = "tmp_ria_test_pseudo_y",
 			library = learners,

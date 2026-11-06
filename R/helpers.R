@@ -121,8 +121,16 @@ recombine_alpha <- function(x, folds) {
 }
 
 simplify_weights <- function(weights) {
-	purrr::map_depth(weights, 3, \(x) data.frame(as.list(x))) |>
-		purrr::map_depth(2, \(x) do.call(rbind, x))
+	purrr::map_depth(weights, 2, function(folds) {
+		# Constant-outcome folds may use only the mean learner.
+		learners <- unique(unlist(lapply(folds, names), use.names = FALSE))
+		aligned <- lapply(folds, function(x) {
+			out <- setNames(numeric(length(learners)), learners)
+			out[names(x)] <- x
+			data.frame(as.list(out))
+		})
+		do.call(rbind, aligned)
+	})
 }
 
 one_hot_encode <- function(data, vars) {

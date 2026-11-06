@@ -1,6 +1,8 @@
 # ria.test 0.3.0.9005
 
 * Use 5 cross-fitting folds and 2 L-prime folds by default.
+* Fit finite, exactly constant continuous outcomes with the mean learner in
+  outcome and sequential regressions, avoiding zero-variance combination fits.
 
 # ria.test 0.3.0.9004
 
