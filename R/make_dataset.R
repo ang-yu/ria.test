@@ -22,8 +22,8 @@ make_dataset <- function(data, x, device, weights = NULL) {
 		},
 		.getitem = function(i) {
 			fields <- grep("data", names(self), value = TRUE)
-			batch <- setNames(lapply(fields, function(x) self[[x]][i, ]), fields)
-			batch$weights <- self$weights[i, ]
+			batch <- setNames(lapply(fields, function(x) self[[x]]$select(1L, i)), fields)
+			batch$weights <- self$weights$select(1L, i)
 			batch
 		},
 		.length = function() {
