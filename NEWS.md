@@ -1,3 +1,10 @@
+# ria.test 0.3.0.9007
+
+* Use LightGBM, the sample mean, multivariate adaptive regression splines, and
+  a single-hidden-layer neural network by default for the sequential outcome
+  regressions. Super Learner fits with multiple candidates now average their
+  predictions using nonnegative, cross-validated weights that sum to one.
+
 # ria.test 0.3.0.9006
 
 * Fit finite, exactly constant continuous outcomes with the mean learner in

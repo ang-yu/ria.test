@@ -1,7 +1,7 @@
 Package: ria.test
 Type: Package
 Title: Testing Equality of Natural Mediation Effects and Their Randomized Interventional Analogues
-Version: 0.3.0.9006
+Version: 0.3.0.9007
 Authors@R:
     person(given = "Ang",
            family = "Yu",
@@ -27,6 +27,7 @@ Depends:
     R (>= 4.2.0)
 URL: https://github.com/ang-yu/ria.test
 BugReports: https://github.com/ang-yu/ria.test/issues
+Additional_repositories: https://mlr-org.r-universe.dev
 Imports: 
     checkmate,
     Matrix,
@@ -39,10 +40,14 @@ Imports:
     data.table,
     coro,
     generics,
-    mlr3superlearner,
+    mlr3superlearner (>= 0.1.2),
+    mlr3extralearners,
+    lightgbm,
+    earth,
+    nnet,
     progressr,
     ife (>= 0.2.5)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1

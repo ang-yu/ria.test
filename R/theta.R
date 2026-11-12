@@ -12,12 +12,21 @@ fit_theta_regression <- function(data, target, library, outcome_type, folds, new
 		library = library,
 		outcome_type = outcome_type,
 		folds = folds,
+		discrete = FALSE,
 		newdata = newdata,
 		group = group
 	)
 }
 
 estimate_theta <- function(cd, folds, params, learners_regressions, control) {
+	# mlr3superlearner checks the search path for these learner wrappers.
+	learner_names <- vapply(learners_regressions, `[[`, character(1), 1L)
+	if (any(learner_names %in% c("lightgbm", "earth")) &&
+			!"mlr3extralearners" %in% .packages()) {
+		attachNamespace(loadNamespace("mlr3extralearners"))
+		on.exit(detach("package:mlr3extralearners"), add = TRUE)
+	}
+
 	thetas <- vector("list", control$crossfit_folds)
 	i <- 1
 	cli::cli_progress_step("Fitting outcome regressions... {i}/{control$crossfit_folds} folds")

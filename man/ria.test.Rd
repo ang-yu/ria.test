@@ -16,7 +16,7 @@ ria.test(
   d0 = NULL,
   d1 = NULL,
   weights = rep(1, nrow(data)),
-  learners = c("mean", "glm", "ranger"),
+  learners = c("lightgbm", "mean", "earth", "nnet"),
   nn_module = sequential_module(),
   control = ria.test.control()
 )
@@ -61,8 +61,11 @@ See examples for how to specify shift functions for continuous, binary, and cate
 A optional vector of survey weights.}
 
 \item{learners}{[\code{character}]\cr
-A vector of \code{mlr3superlearner} algorithms
-for estimation of the outcome regressions. Defaults to \code{c("mean", "glm", "ranger")}.}
+Candidate algorithms for the sequential outcome regressions. The defaults
+are LightGBM (Ke et al., 2017), the sample mean, multivariate adaptive
+regression splines (Friedman, 1991), and a single-hidden-layer neural
+network. Each regression combines the candidates' predictions using
+nonnegative weights estimated by cross-validation and normalized to sum to one.}
 
 \item{nn_module}{[\code{function}]\cr A function that returns a neural network module.}
 

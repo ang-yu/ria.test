@@ -1,3 +1,34 @@
+test_that("default learners produce weighted predictions for both outcome types", {
+	learners <- eval(formals(ria.test)$learners)
+	expect_identical(learners, c("lightgbm", "mean", "earth", "nnet"))
+	if (!"mlr3extralearners" %in% .packages()) {
+		attachNamespace("mlr3extralearners")
+		on.exit(detach("package:mlr3extralearners"), add = TRUE)
+	}
+	set.seed(42)
+	data <- data.frame(x = rnorm(240), z = rnorm(240))
+	binary_y <- rbinom(nrow(data), 1, plogis(0.6 * data$x))
+	newdata <- list(data = data[1:10, ])
+
+	for (type in c("continuous", "binomial")) {
+		data$y <- if (type == "continuous") data$x + rnorm(nrow(data)) else binary_y
+		utils::capture.output(
+			fit <- fit_theta_regression(data, "y", learners, type, 3L, newdata)
+		)
+		expect_false(fit$discrete)
+		expect_length(fit$learners, 4L)
+		expect_true(all(is.finite(fit$weights) & fit$weights >= 0))
+		expect_equal(sum(fit$weights), 1)
+
+		predictions <- vapply(fit$learners, function(model) {
+			pred <- model$predict_newdata(newdata$data)
+			if (type == "continuous") pred$response else pred$prob[, "1"]
+		}, numeric(nrow(newdata$data)))
+		ids <- vapply(fit$learners, function(model) model$id, character(1))
+		expect_equal(fit$preds$data, as.vector(predictions %*% fit$weights[ids]))
+	}
+})
+
 test_that("constant continuous outcomes retain the Super Learner prediction interface", {
 	data <- data.frame(x = seq_len(12), y = 0)
 	newdata <- list(data = data[1:3, ], shifted = data[4:8, ])
