@@ -1,6 +1,6 @@
 test_that("default learners produce weighted predictions for both outcome types", {
 	learners <- eval(formals(ria.test)$learners)
-	expect_identical(learners, c("lightgbm", "mean", "earth", "nnet"))
+	expect_identical(learners, list("lightgbm", "mean", "earth", list("nnet", decay = 0.001)))
 	if (!"mlr3extralearners" %in% .packages()) {
 		attachNamespace("mlr3extralearners")
 		on.exit(detach("package:mlr3extralearners"), add = TRUE)
@@ -17,6 +17,7 @@ test_that("default learners produce weighted predictions for both outcome types"
 		)
 		expect_false(fit$discrete)
 		expect_length(fit$learners, 4L)
+		expect_equal(fit$learners[[4L]]$model$decay, 0.001)
 		expect_true(all(is.finite(fit$weights) & fit$weights >= 0))
 		expect_equal(sum(fit$weights), 1)
 
