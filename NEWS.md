@@ -1,3 +1,7 @@
+# ria.test 0.4.0.9000
+
+* The README example now uses the default Torch seed.
+
 # ria.test 0.4.0
 
 ## Breaking change

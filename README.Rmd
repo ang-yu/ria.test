@@ -63,8 +63,7 @@ test_fit <- ria.test(
   pre = "C",
   post = "L",
   d0 = \(data, trt) rep(0, nrow(data)),
-  d1 = \(data, trt) rep(1, nrow(data)),
-  control = ria.test.control(torch_seed = 123L)
+  d1 = \(data, trt) rep(1, nrow(data))
 )
 
 tidy(test_fit)
