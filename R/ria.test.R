@@ -39,6 +39,9 @@
 #'  network with weight decay \code{decay = 0.001}. Each regression combines
 #'  the candidates' predictions using
 #'  nonnegative weights estimated by cross-validation and normalized to sum to one.
+#'  The LightGBM and MARS learners require \pkg{mlr3extralearners} from
+#'  \url{https://mlr-org.r-universe.dev}. To use a main-effects generalized
+#'  linear model alone, set \code{learners = "glm"}.
 #' @param nn_module [\code{function}]\cr A function that returns a neural network module.
 #' @param control [\code{ria.test.control}]\cr
 #'  Control parameters for the estimation procedure. Use \code{ria.test.control()} to set these values.

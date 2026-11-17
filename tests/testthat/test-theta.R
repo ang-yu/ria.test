@@ -1,6 +1,7 @@
 test_that("default learners produce weighted predictions for both outcome types", {
 	learners <- eval(formals(ria.test)$learners)
 	expect_identical(learners, list("lightgbm", "mean", "earth", list("nnet", decay = 0.001)))
+	skip_if_not_installed("mlr3extralearners")
 	if (!"mlr3extralearners" %in% .packages()) {
 		attachNamespace("mlr3extralearners")
 		on.exit(detach("package:mlr3extralearners"), add = TRUE)

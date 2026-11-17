@@ -7,26 +7,34 @@ export(ria.test.control)
 export(sequential_module)
 export(tidy)
 if (getRversion() < "4.3.0") importFrom("S7", "@")
-importFrom(checkmate,`%??%`)
-importFrom(checkmate,assert_data_frame)
-importFrom(checkmate,assert_function)
-importFrom(checkmate,assert_numeric)
-importFrom(cli,cli_div)
-importFrom(cli,cli_end)
-importFrom(cli,cli_h3)
-importFrom(cli,cli_rule)
+importFrom(checkmate,
+  "%??%",
+  assert_data_frame,
+  assert_function,
+  assert_numeric
+)
+importFrom(cli,
+  cli_div,
+  cli_end,
+  cli_h3,
+  cli_rule
+)
 importFrom(earth,earth)
 importFrom(generics,tidy)
 importFrom(lightgbm,lgb.train)
 importFrom(nnet,nnet)
-importFrom(purrr,iwalk)
-importFrom(purrr,list_rbind)
-importFrom(purrr,map)
-importFrom(stats,dist)
-importFrom(stats,model.matrix)
-importFrom(stats,na.omit)
-importFrom(stats,predict)
-importFrom(stats,qnorm)
-importFrom(stats,setNames)
-importFrom(stats,var)
-importFrom(stats,weighted.mean)
+importFrom(purrr,
+  iwalk,
+  list_rbind,
+  map
+)
+importFrom(stats,
+  dist,
+  model.matrix,
+  na.omit,
+  predict,
+  qnorm,
+  setNames,
+  var,
+  weighted.mean
+)

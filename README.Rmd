@@ -22,14 +22,23 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-*ria.test* implements the empirical test introduced by Yu, Ge, and Elwert (2026) for detecting when randomized interventional analogues should not be interpreted as natural mediation effects. The test estimates `TE - TE^R`, the difference between the total effect and its randomized interventional analogue. Rejecting `TE - TE^R = 0` falsifies the composite null that the natural indirect and direct effects equal their randomized interventional analogues. The procedure remains valid in settings where the natural effects themselves are not identified, and `|TE - TE^R|` provides a lower bound on the total divergence between the natural and randomized interventional decompositions. The estimation uses a Riesz-regression approach. 
+*ria.test* implements the empirical test introduced by [Yu, Ge, and Elwert (2025)](https://arxiv.org/abs/2407.02671) for detecting when randomized interventional analogues should not be interpreted as natural mediation effects. The test estimates `TE - TE^R`, the difference between the total effect and its randomized interventional analogue. Rejecting `TE - TE^R = 0` falsifies the composite null that the natural indirect and direct effects equal their randomized interventional analogues. The procedure remains valid in settings where the natural effects themselves are not identified, and `|TE - TE^R|` provides a lower bound on the total divergence between the natural and randomized interventional decompositions. The estimation uses a Riesz-regression approach.
 
 *ria.test* is derived from the [*crumble*](https://CRAN.R-project.org/package=crumble) package with various adaptations. {ria.test} uniquely enables statistical inference for the estimated TE − TE<sup>R</sup>. Separately, {ria.test} also makes improvements in terms of reproducibility, efficiency, and the handling of edge cases.
 
 ### Installation
 
 ```{r eval=FALSE}
-remotes::install_github("ang-yu/ria.test")
+install.packages("ria.test")
+```
+
+The default ensemble uses the LightGBM and MARS wrappers from
+`mlr3extralearners`. Install these once before running the example below.
+If you use `learners = "glm"`, you can skip this step.
+
+```{r eval=FALSE}
+install.packages("mlr3extralearners",
+                 repos = c("https://mlr-org.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ### Usage

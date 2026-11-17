@@ -38,6 +38,7 @@ if (torch::torch_is_installed()) {
 		post = "L",
 		d0 = \(data, trt) rep(0, nrow(data)),
 		d1 = \(data, trt) rep(1, nrow(data)),
+		learners = "glm",
 		control = ria.test.control(
 			crossfit_folds = 2L,
 			mlr3superlearner_folds = 2L,

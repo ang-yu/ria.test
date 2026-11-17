@@ -1,7 +1,7 @@
 Package: ria.test
 Type: Package
 Title: Testing Equality of Natural Mediation Effects and Their Randomized Interventional Analogues
-Version: 0.3.0.9007
+Version: 0.4.0
 Authors@R:
     person(given = "Ang",
            family = "Yu",
@@ -9,8 +9,11 @@ Authors@R:
            email = "ang_yu@outlook.com",
            comment = c(ORCID = "0000-0002-1828-0165"))
 Maintainer: Ang Yu <ang_yu@outlook.com>
+Copyright: Ang Yu (ria.test extensions), Nicholas Williams and Iván Díaz
+    (code derived from crumble).
 Description: Implements the empirical test introduced by Yu, Ge, and Elwert
-    (2026) for detecting when randomized interventional analogues should not be
+    (2025) <doi:10.48550/arXiv.2407.02671> for detecting when randomized
+    interventional analogues should not be
     interpreted as natural mediation effects. The package estimates natural
     effects, their randomized interventional analogues, and TE - TE^R, the
     difference between the total effect and its randomized interventional
@@ -41,13 +44,13 @@ Imports:
     coro,
     generics,
     mlr3superlearner (>= 0.1.2),
-    mlr3extralearners,
     lightgbm,
     earth,
     nnet,
     progressr,
     ife (>= 0.2.5)
 Suggests: 
+    mlr3extralearners,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.1.1

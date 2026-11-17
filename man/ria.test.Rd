@@ -66,7 +66,10 @@ are LightGBM (Ke et al., 2017), the sample mean, multivariate adaptive
 regression splines (Friedman, 1991), and a single-hidden-layer neural
 network with weight decay \code{decay = 0.001}. Each regression combines
 the candidates' predictions using
-nonnegative weights estimated by cross-validation and normalized to sum to one.}
+nonnegative weights estimated by cross-validation and normalized to sum to one.
+The LightGBM and MARS learners require \pkg{mlr3extralearners} from
+\url{https://mlr-org.r-universe.dev}. To use a main-effects generalized
+linear model alone, set \code{learners = "glm"}.}
 
 \item{nn_module}{[\code{function}]\cr A function that returns a neural network module.}
 
@@ -104,6 +107,7 @@ if (torch::torch_is_installed()) {
 		post = "L",
 		d0 = \(data, trt) rep(0, nrow(data)),
 		d1 = \(data, trt) rep(1, nrow(data)),
+		learners = "glm",
 		control = ria.test.control(
 			crossfit_folds = 2L,
 			mlr3superlearner_folds = 2L,

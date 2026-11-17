@@ -23,6 +23,12 @@ estimate_theta <- function(cd, folds, params, learners_regressions, control) {
 	learner_names <- vapply(learners_regressions, `[[`, character(1), 1L)
 	if (any(learner_names %in% c("lightgbm", "earth")) &&
 			!"mlr3extralearners" %in% .packages()) {
+		if (!requireNamespace("mlr3extralearners", quietly = TRUE)) {
+			stop("The LightGBM and MARS learners require mlr3extralearners. ",
+				"Install it with install.packages('mlr3extralearners', ",
+				"repos = c('https://mlr-org.r-universe.dev', 'https://cloud.r-project.org')), ",
+				"or specify other learners, e.g. learners = 'glm'.", call. = FALSE)
+		}
 		attachNamespace(loadNamespace("mlr3extralearners"))
 		on.exit(detach("package:mlr3extralearners"), add = TRUE)
 	}

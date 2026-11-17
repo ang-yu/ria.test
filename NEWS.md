@@ -1,54 +1,34 @@
-# ria.test 0.3.0.9007
+# ria.test 0.4.0
 
-* Use LightGBM, the sample mean, multivariate adaptive regression splines, and
-  a single-hidden-layer neural network with `decay = 0.001` by default for the
-  sequential outcome regressions. Super Learner fits with multiple candidates now average their
-  predictions using nonnegative, cross-validated weights that sum to one.
+## Breaking change
 
-# ria.test 0.3.0.9006
+* In `ria.test()`, replace the named arguments `outcome` and `mediators`
+  with `out` and `med`, respectively. Their positions are unchanged.
 
-* Fit finite, exactly constant continuous outcomes with the mean learner in
-  outcome and sequential regressions, avoiding zero-variance combination fits.
-* Align learner weights across folds when constant outcomes use the mean learner.
+## Estimation and inference
 
-# ria.test 0.3.0.9005
-
-* Use 5 cross-fitting folds and 2 L-prime folds by default.
-
-# ria.test 0.3.0.9004
-
-* Subtract the weighted mean score from each observation's score before
-  computing standard errors. This corrects inference when cluster sizes or
-  total weights differ. The package now requires `ife` 0.2.5 or later to
-  compute standard errors from within-cluster sums.
-
-# ria.test 0.3.0.9003
-
-* Set the default `torch_seed` to `1L`. Use `torch_seed = NULL` to skip explicit
-  Torch seeding, or supply another seed to override the default. R-level
-  randomness remains controlled separately with `set.seed()`.
-
-# ria.test 0.3.0.9002
-
-* Change the default Riesz neural-network training to 10 epochs, a learning rate
-  of 0.001, and dropout of 0.2. Calls that omit these settings now use the new
-  defaults; explicit settings continue to take precedence.
-
-# ria.test 0.3.0.9001
-
-* Correct sequential Riesz regression to pair previous-stage weights with their
-  observations in each minibatch and prevent tensor broadcasting across rows.
-  This changes the fitted representers and can change estimates, standard errors,
-  and p-values; analyses using earlier versions should be rerun.
-
-# ria.test 0.3.0.9000
-
-* Change the default learners to `c("mean", "glm", "ranger")`.
+* Sequential Riesz regression now pairs each observation with its own
+  previous-stage weight in every minibatch. This correction can change
+  estimates, standard errors, and p-values. Rerun analyses fitted with
+  earlier releases.
+* Clustered standard errors now use within-cluster sums of influence scores
+  centered at the weighted mean. This corrects inference when clusters
+  differ in size or total weight and requires `ife` 0.2.5 or later.
+* The default sequential outcome regressions now combine LightGBM, the sample
+  mean, multivariate adaptive regression splines, and a single-hidden-layer
+  neural network with `decay = 0.001`. Each regression estimates nonnegative
+  ensemble weights by cross-validation (10 folds by default) and normalizes
+  them to sum to one. The LightGBM and MARS wrappers require
+  `mlr3extralearners` from the mlr-org R-universe.
+* Regressions with a constant, finite continuous outcome use the mean learner.
+  Learner weights are aligned by name across folds.
+* The defaults are now 5 cross-fitting folds and 2 L-prime folds. Riesz
+  networks now train for 10 epochs with a learning rate of 0.001 and
+  dropout of 0.2.
+* The default Torch seed is now 1. Set `torch_seed = NULL` to leave Torch's
+  random-number stream alone. Use `set.seed()` to control R-level randomness.
 
 # ria.test 0.3.0
-
-* Rename the public arguments `outcome` and `mediators` to `out` and `med`.
-  Calls using the old argument names must be updated.
 
 * Use D for treatment, C for baseline covariates, and L for post-treatment
   confounders throughout the implementation, examples, and documentation.
